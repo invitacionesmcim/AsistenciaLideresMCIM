@@ -1,10 +1,9 @@
 :root {
-  --color-cafe: #bf8f37;
   --color-azul:#0478f8;
   --color-blanco:#ffffff;
-  --font-AbhayaLibre: "AbhayaLibre", serif;
+  --font-montserrat:  "Montserrat", sans-serif;
   --font-CarlaSans: "CarlaSans", sans-serif;
-  /* --font:; */
+
 }
 
 html {
@@ -57,14 +56,14 @@ button {
   align-items: center;
   justify-content: center;
   background-color: #fff;
-  color: var(--color-cafe);
+  color: var(--color-azul);
   border: none;
   padding: 10px 20px;
   cursor: pointer;
   font-size: 16px;
   border-radius: 20px;
   font-weight: bold;
-  font-family: var(--font-CarlaSans);
+  font-family: var(--font-montserrat);
   box-shadow: 1px 2px 3px rgba(191, 143, 55, 0.4);
   
 }
@@ -135,7 +134,7 @@ button {
 
     text-align: center;
     color: white;
-    font-family: var(--font-AbhayaLibre);
+    font-family: var(--font-montserrat);
 
     font-size: 22px;
 
@@ -191,7 +190,7 @@ button {
       display: flex;
       flex-direction: column;
       color: black;
-      font-family: "AbhayaLibre", serif;
+      font-family: var(--font-montserrat);
 
       padding-inline: 4.5rem;
       margin-bottom: 1rem;
@@ -209,10 +208,10 @@ button {
       input {
         padding: 5px;
         margin-bottom: 10px;
-        border: 1px solid var(--color-cafe);
+        border: 1px solid var(--color-azul);
         border-radius: 4px;
         font-size: 16px;
-        font-family: "AbhayaLibre", serif;
+        font-family: var(--font-montserrat);
         width: 500px;
         
       }
@@ -231,7 +230,7 @@ button {
     display: none;
     align-items: center;
     justify-content: center;
-    font-family: "AbhayaLibre", serif;
+    font-family: var( --font-montserrat);
     font-weight: normal;
     overflow: hidden;
 
@@ -247,7 +246,7 @@ button {
       height: 90%;
       border-radius: 8px;
       text-align: center;
-      color: var(--color-cafe);
+      color: var(--color-azul);
     }
 
     #modal-noregistrado {
@@ -263,7 +262,7 @@ button {
       height: 40%;
       border-radius: 8px;
       text-align: center;
-      color: var(--color-cafe);
+      color: var(--color-azul);
     }
 
     #modal-verificando {
@@ -279,7 +278,7 @@ button {
       height: 40%;
       border-radius: 8px;
       text-align: center;
-      color: var(--color-cafe);
+      color: var(--color-azul);
     }
 
     .titulo {
@@ -328,7 +327,7 @@ button {
         align-items: center;
 
         #fecha {
-          border-right: #bf8f30 1px solid;
+          border-right: var(--color-azul) 1px solid;
           padding-right: 5px;
           width: 40%;
           h3 {
@@ -345,7 +344,7 @@ button {
         }
 
         #hora {
-          border-right: #bf8f37 1px solid;
+          border-right: var(--color-azul) 1px solid;
           padding-right: 5px;
 
           p {
@@ -377,12 +376,12 @@ button {
       padding: 8px 12px;
       cursor: pointer;
       border-radius: 4px;
-      box-shadow: 1px 2px 3px var(--color-cafe);
+      box-shadow: 1px 2px 3px var(--color-azul);
       border: none;
-      background: var(--color-cafe);
+      background: var(--color-azul);
       color: #fff;
       font-size: 16px;
-      font-family: "CarlaSans", sans-serif;
+      font-family:var(--font-montserrat);
       align-self: center;
       justify-self: center;
     }
@@ -444,7 +443,7 @@ button {
 
     text-align: center;
     color: black;
-    font-family: var(--font-AbhayaLibre);
+    font-family: var(--font-montserrat);
 
     font-size: 18px;
 
@@ -508,7 +507,7 @@ button {
       display: flex;
       flex-direction: column;
       color: black;
-      font-family: "AbhayaLibre", serif;
+      font-family: var(--font-montserrat);
 
       padding-inline: 2.5rem;
         margin-bottom: 1rem;
@@ -523,10 +522,10 @@ button {
       input {
         padding: 5px;
         margin-bottom: 10px;
-        border: 1px solid var(--color-cafe);
+        border: 1px solid var(--color-azul);
         border-radius: 4px;
         font-size: 16px;
-        font-family: "AbhayaLibre", serif;
+        font-family: var(--font-montserrat);
       }
 
       button {
@@ -544,7 +543,7 @@ button {
     display: none;
     align-items: center;
     justify-content: center;
-    font-family: var(--font-AbhayaLibre);
+    font-family: var(--font-montserrat);
     font-weight: normal;
     overflow: hidden;
 
@@ -560,7 +559,7 @@ button {
       height: 90%;
       border-radius: 8px;
       text-align: center;
-      color: var(--color-cafe);
+      color: var(--color-azul);
     }
 
     #modal-noregistrado {
@@ -576,7 +575,7 @@ button {
       height: 40%;
       border-radius: 8px;
       text-align: center;
-      color: var(--color-cafe);
+      color: var(--color-azul);
     }
 
     #modal-verificando {
@@ -592,7 +591,7 @@ button {
       height: 40%;
       border-radius: 8px;
       text-align: center;
-      color: var(--color-cafe);
+      color: var(--color-azul);
     }
 
     .titulo {
@@ -641,7 +640,7 @@ button {
         align-items: center;
 
         #fecha {
-          border-right: #bf8f30 1px solid;
+          border-right: var(--color-azul) 1px solid;
           padding-right: 5px;
           width: 40%;
           h3 {
@@ -658,7 +657,7 @@ button {
         }
 
         #hora {
-          border-right: #bf8f37 1px solid;
+          border-right: var(--color-azul) 1px solid;
           padding-right: 5px;
 
           p {
@@ -690,12 +689,12 @@ button {
       padding: 8px 12px;
       cursor: pointer;
       border-radius: 4px;
-      box-shadow: 1px 2px 3px var(--color-cafe);
+      box-shadow: 1px 2px 3px var(--color-azul);
       border: none;
-      background: var(--color-cafe);
+      background: var(--color-azul);
       color: #fff;
       font-size: 16px;
-      font-family: "CarlaSans", sans-serif;
+      font-family:var(--font-montserrat);
       align-self: center;
       justify-self: center;
     }
@@ -754,7 +753,7 @@ button {
 
     text-align: center;
     color: black;
-    font-family: var(--font-AbhayaLibre);
+    font-family: var(--font-montserrat);
 
     font-size: 18px;
 
@@ -817,8 +816,8 @@ button {
     .invitacion-form {
       display: flex;
       flex-direction: column;
-      color: black;
-      font-family: "AbhayaLibre", serif;
+        color: black;
+        font-family: var(--font-montserrat);
 
       padding-inline: 1rem;
         margin-bottom: 1rem;
@@ -833,10 +832,10 @@ button {
       input {
         padding: 5px;
         margin-bottom: 10px;
-        border: 1px solid var(--color-cafe);
+        border: 1px solid var(--color-azul);
         border-radius: 4px;
         font-size: 16px;
-        font-family: "AbhayaLibre", serif;
+        font-family: var(--font-montserrat);
       }
 
       button {
@@ -854,7 +853,7 @@ button {
     display: none;
     align-items: center;
     justify-content: center;
-    font-family: "AbhayaLibre", serif;
+    font-family: var(--font-montserrat);
     font-weight: normal;
     overflow: hidden;
 
@@ -870,7 +869,7 @@ button {
       height: 90%;
       border-radius: 8px;
       text-align: center;
-      color: var(--color-cafe);
+      color: var(--color-azul);
     }
 
     #modal-noregistrado {
@@ -886,7 +885,7 @@ button {
       height: 40%;
       border-radius: 8px;
       text-align: center;
-      color: var(--color-cafe);
+      color: var(--color-azul);
     }
 
     #modal-verificando {
@@ -902,7 +901,7 @@ button {
       height: 40%;
       border-radius: 8px;
       text-align: center;
-      color: var(--color-cafe);
+      color: var(--color-azul);
     }
 
     .titulo {
@@ -951,7 +950,7 @@ button {
         align-items: center;
 
         #fecha {
-          border-right: #bf8f30 1px solid;
+          border-right: var(--color-azul) 1px solid;
           padding-right: 5px;
           width: 40%;
           h3 {
@@ -968,7 +967,7 @@ button {
         }
 
         #hora {
-          border-right: #bf8f37 1px solid;
+          border-right: var(--color-azul) 1px solid;
           padding-right: 5px;
 
           p {
@@ -1000,12 +999,12 @@ button {
       padding: 8px 12px;
       cursor: pointer;
       border-radius: 4px;
-      box-shadow: 1px 2px 3px var(--color-cafe);
+      box-shadow: 1px 2px 3px var(--color-azul);
       border: none;
-      background: var(--color-cafe);
+      background: var(--color-azul);
       color: #fff;
       font-size: 16px;
-      font-family: "CarlaSans", sans-serif;
+      font-family: var(--font-montserrat);
       align-self: center;
       justify-self: center;
     }

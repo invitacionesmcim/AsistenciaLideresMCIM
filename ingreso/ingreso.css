@@ -1,7 +1,9 @@
 :root {
-  --color-cafe: #bf8f37;
-  --font-AbhayaLibre: "AbhayaLibre", serif;
-  --font-CarlaSans: "CarlaSans", sans-serif;
+
+
+    --color-azul:#0478f8;
+  --color-blanco:#ffffff;
+  --font-montserrat:  "Montserrat", sans-serif;
 
 }
 
@@ -15,7 +17,7 @@ body {
   width: 100vw;
   height: 100vh;
   overflow-x: hidden  ;
-  font-family: var(--font-AbhayaLibre);
+  font-family: var(--font-montserrat);
 
 }
 
@@ -41,7 +43,6 @@ body {
 
     div{
         
-        background-image: url('../images/miframeV.webp');
         background-size: cover;
         background-position: center;
         background-repeat: no-repeat;
@@ -103,20 +104,20 @@ body {
         flex-direction: column;
         align-items: center;
         justify-content: center;
-        font-family: var(--font-AbhayaLibre);
+        font-family: var(--font-montserrat);
 
         button{
-            font-family: var(--font-CarlaSans);
+            font-family: var(--font-montserrat);
             font-size: 1.8rem;
             font-weight: bolder;
             margin: 20px;
             padding: 10px 20px;
             border-radius: 10px;
-            border: 2px 2px var(--color-cafe);
-            background-color: var(--color-cafe);
+            border: 2px 2px var(--color-azul);
+            background-color: var(--color-azul);
             color: white;
             cursor: pointer;
-            box-shadow: 2px 2px 6px var(--color-cafe);
+            box-shadow: 2px 2px 6px var(--color-azul);
             /* text-shadow: -1px -1px 1px white; */
 
 
