@@ -16,9 +16,9 @@ const vAltoReal= window.innerHeight;
   const p = 20;
 
   //Local
-  const URLbase ="http://192.168.1.13:5500"; //Desarrollo
+  // const URLbase ="http://192.168.1.13:5500"; //Desarrollo
   //Real
-  //const URLbase ="https://invitacionesmcim.github.io/AcciondegraciasMCIM2025";
+  const URLbase ="https://invitacionesmcim.github.io/AsistenciaLideresMCIM";
   
 
 
