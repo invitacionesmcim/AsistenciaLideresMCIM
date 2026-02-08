@@ -18,7 +18,7 @@ const vAltoReal= window.innerHeight;
   //Local
   // const URLbase ="http://192.168.1.13:5500"; //Desarrollo
   //Real
-  const URLbase ="https://invitacionesmcim.github.io/AsistenciaLideresMCIM";
+  const URLbase ="https://invitacionesmcim.github.io/AsistenciaSantificacion";
   
 
 
@@ -47,7 +47,7 @@ const vAltoReal= window.innerHeight;
 
 
   //REAL
-  const URLApp= 'https://script.google.com/macros/s/AKfycbwlS3OyV1X6axWQsMSl0z0uG9qK4-LFN8WOe8JM6GifEJNkT7MaTtyr8UpcYXnY4xd-9Q/exec';
+  const URLApp= 'https://script.google.com/macros/s/AKfycbwdJI3bu-VUPepQEicbLLcIoay4f_vCIERDQQXoZmb_MaHAgKFNx-y6OtL44GzfJkd5/exec';
   
   
   const modalContent = document.getElementById("modal-content");
