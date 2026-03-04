@@ -51,7 +51,7 @@ const vAltoReal= window.innerHeight;
   //Santificación
   // const URLApp= 'https://script.google.com/macros/s/AKfycbyfKldB6V4g-Pz5eXaw8WwBrTqCe4ocuMEBCsVQR0T3tVgzbGOY7MirG5sHoULtVXTx/exec';
   //Líderes
-  const URLApp= 'https://script.google.com/macros/s/AKfycbzhlXOSkazPYoFetHg9TXNLY20ZmQn6Tb2Bq14iMn-jzqWHFGMyDq-X4Gyqk6xzR8Sx5A/exec';
+  const URLApp= 'https://script.google.com/macros/s/AKfycbzpRcm3kxm6LKRoZV2nmneecg2PLuW8bnVibVTmXOIWloQe7t8F97LSXT_sm9lDHpdI/exec';
   
   
   const modalContent = document.getElementById("modal-content");
