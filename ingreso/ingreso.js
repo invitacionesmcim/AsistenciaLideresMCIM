@@ -2,7 +2,7 @@
   //Santificación
   // const URLApp= 'https://script.google.com/macros/s/AKfycbyfKldB6V4g-Pz5eXaw8WwBrTqCe4ocuMEBCsVQR0T3tVgzbGOY7MirG5sHoULtVXTx/exec';
   //Líderes
-  const URLApp= 'https://script.google.com/macros/s/AKfycbxgznpzetMzJdOEXSAGZbMSL4NEfFs4piePqrYhmi6dVG0e50Fe1EH5cEBLaOWKfc2TEQ/exec';
+  const URLApp= 'https://script.google.com/macros/s/AKfycbwR-tNcUVVhiOV24UphHCrq0mzDoihvedZ_UcZbDbQd5-rbrdr7tkr-zjheEdaDiG5Vgw/exec';
   
   
 
