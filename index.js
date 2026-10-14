@@ -8,6 +8,7 @@ const vAltoReal= window.innerHeight;
 // Elementos
   const inputName = document.getElementById('name');
   const inputId = document.getElementById('id');
+  const cientocuarentaycuatroSN = document.getElementById('cientocuarentaycuatroSN');
   
   const qrcodeContainer = document.getElementById('qrcode');
   const downloadBtn = document.getElementById('downloadBtn');
@@ -51,17 +52,26 @@ const vAltoReal= window.innerHeight;
   //Santificación
   // const URLApp= 'https://script.google.com/macros/s/AKfycbyfKldB6V4g-Pz5eXaw8WwBrTqCe4ocuMEBCsVQR0T3tVgzbGOY7MirG5sHoULtVXTx/exec';
   //Líderes
-  const URLApp= 'https://script.google.com/macros/s/AKfycbwhAPeINoIzJiKmd_1WCbVkBlcpSbQzRLtJ_QZCohL1-gTtlJNEu2IbNfYNjCbRYRiR-Q/exec';
+  const URLApp= 'https://script.google.com/macros/s/AKfycbyr5RYG-wkIigfPVdEEUqVPGw0yQjoL7zS2ODW-QAXdIjKRtHiq5bLKR2Qzum0RKLGv1w/exec';
   
   
   const modalContent = document.getElementById("modal-content");
 const modalNoRegistrado = document.getElementById("modal-noregistrado");
 const modalVerificando = document.getElementById("modal-verificando");
+
 const modo = "consulta";
 const lugar= "casa";
 
+
 async function Ingresar(texto) {
-      const url = URLApp + "?texto=" + encodeURIComponent(texto) + "&modo=" + encodeURIComponent(modo)+"&lugar=" + encodeURIComponent(lugar);
+
+  console.log("Respuesta 144", cientocuarentaycuatroSN.value);
+      const url = URLApp + "?texto=" + encodeURIComponent(texto) + 
+                            "&modo=" + encodeURIComponent(modo) + 
+                            "&lugar=" + encodeURIComponent(lugar) + 
+                            "&cientocuarentaycuatroSN=" + encodeURIComponent(cientocuarentaycuatroSN.value);
+
+  console.log("URL: ", url);
   const res = await fetch(url);
   const data = await res.json();
    

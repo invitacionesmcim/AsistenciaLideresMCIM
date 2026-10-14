@@ -7,6 +7,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Barlow+Condensed:wght@500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="estilos.css"></link>
         <link rel="icon" type="image/png" href="./images/icono.png">
     <title>Líderes MCIM</title>
@@ -28,6 +29,12 @@
                     
                     <label for="id">Número de documento:</label>
                     <input type="text" id="id" name="id" required>
+
+                    <label for="cientocuarentaycuatroSN">¿Perteneces al equipo de 144?</label>
+                    <select id="cientocuarentaycuatroSN" name="cientocuarentaycuatroSN">
+                        <option value="NO">NO</option>
+                        <option value="SI">SI</option>
+                    </select>
                     
                     <button onclick="generarQR()">Continuar</button>
                 </div>

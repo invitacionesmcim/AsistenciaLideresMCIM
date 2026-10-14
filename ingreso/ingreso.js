@@ -2,7 +2,7 @@
   //Santificación
   // const URLApp= 'https://script.google.com/macros/s/AKfycbyfKldB6V4g-Pz5eXaw8WwBrTqCe4ocuMEBCsVQR0T3tVgzbGOY7MirG5sHoULtVXTx/exec';
   //Líderes
-  const URLApp= 'https://script.google.com/macros/s/AKfycbwhAPeINoIzJiKmd_1WCbVkBlcpSbQzRLtJ_QZCohL1-gTtlJNEu2IbNfYNjCbRYRiR-Q/exec';
+  const URLApp= 'https://script.google.com/macros/s/AKfycbyr5RYG-wkIigfPVdEEUqVPGw0yQjoL7zS2ODW-QAXdIjKRtHiq5bLKR2Qzum0RKLGv1w/exec';
   
   
 
@@ -39,43 +39,41 @@ async function Ingresar(lugar) {
   const data = await res.json();
 
   if (data.encontrado) {
-    // console.log("Texto encontrado en la fila:", data.fila);
     SI.style.display = "flex";
     NO.style.display = "none";
     Veri.style.display = "none";
     Info.style.display = "none";
 
-    if (lugar == "bodega") {
-      if (data.registradoBodega) {
-        SI.innerHTML = "<p>Upss... <br> Parece que " +   nombrePersona + " ya ingresó a EF. <br> ❌ </p>";
-      } else {
-        if(data.genero === "FEMENINO"){SI.innerHTML = "<p> Bienvenida " + nombrePersona + "<br> ✅ </p>";} 
-        else if(data.genero === "MASCULINO"){SI.innerHTML = "<p> Bienvenido " + nombrePersona + "<br> ✅ </p>";} 
-        else{SI.innerHTML = "<p> Bienvenido " + nombrePersona + "<br> ✅ </p>";} 
-      }
-    }
+    const yaIngreso = lugar === "bodega" ? data.registradoBodega : data.registradoIglesia;
+    const sitio = lugar === "bodega" ? "EF" : "la iglesia";
 
-    if (lugar == "iglesia") {
-      if (data.registradoIglesia) {
-        SI.innerHTML =
-          "<p>Upss... <br> Parece que " +
-          nombrePersona +
-          " ya ingresó a la iglesia. <br> ❌ </p>";
-      } else {
-        if(data.genero === "FEMENINO"){SI.innerHTML = "<p> Bienvenida " + nombrePersona + "<br> ✅ </p>";} 
-        else if(data.genero === "MASCULINO"){SI.innerHTML = "<p> Bienvenido " + nombrePersona + "<br> ✅ </p>";} 
-        else{SI.innerHTML = "<p> Bienvenido " + nombrePersona + "<br> ✅ </p>";} 
-      }
+    // Caso repetido: bloque negro. Caso exitoso: bloque verde.
+    SI.classList.toggle("repetido", Boolean(yaIngreso));
+
+    if (yaIngreso) {
+      pintarMensaje(SI, ["Upss...", "Parece que " + nombrePersona + " ya ingresó a " + sitio + ".", "❌"]);
+    } else {
+      const saludo = data.genero === "FEMENINO" ? "Bienvenida" : "Bienvenido";
+      pintarMensaje(SI, [saludo + " " + nombrePersona, "✅"]);
     }
   } else {
     SI.style.display = "none";
+    SI.classList.remove("repetido");
     NO.style.display = "flex";
     Veri.style.display = "none";
-    NO.innerHTML = "<p> No se encuentra en la lista." + "<br> ❌ </p>";
     Info.style.display = "none";
+    pintarMensaje(NO, ["No se encuentra en la lista.", "❌"]);
   }
 }
 
+function pintarMensaje(contenedor, lineas) {
+  const msg = document.createElement("p");
+  lineas.forEach((linea, i) => {
+    if (i) msg.append(document.createElement("br"));
+    msg.append(linea);
+  });
+  contenedor.replaceChildren(msg);
+}
 
 function des(texto, clave) {
   const alfabeto =

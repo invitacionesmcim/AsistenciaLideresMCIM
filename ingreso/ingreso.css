@@ -1,128 +1,241 @@
+/* ==========================================================================
+   Líderes MCIM – Confirmación de ingreso (página que abre el QR)
+   Mismo sistema visual que la página principal: papel gris claro, negro de
+   afiche, verde "sticker", Anton + Barlow Condensed y esquinas rectas.
+   ========================================================================== */
+
+/* ---------- 1. Variables (idénticas a la página principal) ---------- */
 :root {
+  --color-acento: #10a047; /* verde del sticker */
+  --color-tinta: #262626;  /* negro de los titulares */
+  --color-papel: #f3f2ef;  /* papel arrugado */
+  --color-blanco: #ffffff;
+  --color-texto: #262626;
 
+  --font-titulo: "Anton", Impact, "Arial Narrow", sans-serif;
+  --font-texto: "Barlow Condensed", "Arial Narrow", sans-serif;
 
-    --color-azul:#0478f8;
-  --color-blanco:#ffffff;
-  --font-montserrat:  "Montserrat", sans-serif;
+  --espacio-pagina: clamp(1rem, 4vw, 3rem);
+  --ancho-panel: 36rem;
+  --radio: 0;
+}
 
+/* ---------- 2. Base ---------- */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
 }
 
 body {
-  background-color: #fff;
   margin: 0;
-  padding: 0;
+  min-height: 100vh;   /* respaldo */
+  min-height: 100dvh;
+  background-color: var(--color-papel);
   background-image: url("../images/wall.webp");
   background-repeat: repeat;
   background-size: auto;
-  width: 100vw;
-  height: 100vh;
-  overflow-x: hidden  ;
-  font-family: var(--font-montserrat);
-
+  color: var(--color-texto);
+  font-family: var(--font-texto);
+  overflow-x: hidden;
 }
 
+img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+:focus-visible {
+  outline: 3px solid var(--color-acento);
+  outline-offset: 2px;
+}
+
+/* ---------- 3. Contenedor ---------- */
+
+/* Centrado vertical y horizontal; si el contenido no cabe, la página hace scroll
+   (ya no hay position: absolute ni alturas fijas en vh/vw). */
 .container {
-    width: 100vw;
-    height: 100vh;
-    padding: 0%;
-    margin: 0%;
-    
-    position: absolute;
-    top: 0;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    align-content: center;
-    justify-items: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1.25rem;
+  min-height: 100vh;
+  min-height: 100dvh;
+  padding:
+    max(var(--espacio-pagina), env(safe-area-inset-top))
+    max(var(--espacio-pagina), env(safe-area-inset-right))
+    max(var(--espacio-pagina), env(safe-area-inset-bottom))
+    max(var(--espacio-pagina), env(safe-area-inset-left));
+}
 
-    .img-titulo {
-        height: 30%;
-        margin-bottom: 20px;
-    }
+.img-titulo {
+  width: min(100%, 28rem);
+  height: auto;
+  max-height: 26dvh;
+  object-fit: contain;
+}
 
-    div{
-        
-        background-size: cover;
-        background-position: center;
-        background-repeat: no-repeat;
-        
-        text-align: center;
-        
-        align-items: center;
-        justify-content: center;
-        align-self: center;
-        justify-self: center;
-        
-        
-        height: 60vh;
-        width: 80vw;
-        /* border-radius: px; */
-        
-    }
+.container p {
+  margin: 0.25rem 0;
+  max-width: 100%;
+  overflow-wrap: anywhere;
+}
 
-    p{
+/* ---------- 4. Paneles de estado ----------
+   El JS alterna display (none/flex) en cada uno, así que aquí solo se define
+   el valor por defecto: ocultos. Todos comparten la misma estructura. */
+#lugar,
+#veri,
+#si,
+#no,
+#info {
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  width: min(100%, var(--ancho-panel));
+  padding: clamp(1.25rem, 5vw, 2rem);
+  border: 2px solid var(--color-tinta);
+  border-radius: var(--radio);
+  background-color: var(--color-papel);
+  color: var(--color-tinta);
+  text-align: center;
+}
 
-        font-size: 2rem;
-        word-wrap: normal;
-        width: 70%;
-    }
+/* ---------- 5. Elegir lugar ---------- */
+#lugar {
+  font-size: clamp(1.5rem, 1.1rem + 2vw, 2.25rem);
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  line-height: 1.15;
+}
 
-    
+#lugar button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 12rem;
+  min-height: 56px;
+  margin: 0.75rem 0 0.25rem;
+  padding: 10px 32px;
+  border: none;
+  border-radius: var(--radio);
+  background-color: var(--color-acento);
+  color: #fff;
+  font-family: var(--font-texto);
+  font-size: clamp(1.5rem, 1.2rem + 1.5vw, 2rem);
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  cursor: pointer;
+  box-shadow: 3px 3px 0 var(--color-tinta);
+}
 
-    
-    #si, #no, #lugar, #veri{
-        display: none;
-        
-    }
+#lugar button:active {
+  transform: translate(2px, 2px);
+  box-shadow: 1px 1px 0 var(--color-tinta);
+}
 
-    #info{
-        display: none;
-    }
+/* ---------- 6. Verificando ---------- */
+#veri p {
+  font-size: clamp(1.6rem, 1.2rem + 2vw, 2.25rem);
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
 
+/* ---------- 7. Resultado: SÍ / NO ----------
+   Son el momento clave de la pantalla: bloques grandes tipo sticker. */
+#si,
+#no {
+  box-shadow: 6px 6px 0 var(--color-tinta);
+  color: #fff;
+}
 
-    #no p{
-        color: rgb(163, 1, 1);
-    }
+#si {
+  background-color: var(--color-acento);
+}
 
+/* "no" y "ticket ya usado" (clase .repetido que añade el JS sobre #si) van en negro */
+#no,
+#si.repetido {
+  background-color: var(--color-tinta);
+}
 
-    #info{
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        text-align: center;
-        padding: 0;
+#si p,
+#no p {
+  font-family: var(--font-titulo);
+  font-size: clamp(1.75rem, 1.2rem + 3.2vw, 3rem);
+  font-weight: 400; /* Anton solo tiene un peso: evita negrita falsa */
+  letter-spacing: 0.02em;
+  line-height: 1.15;
+  text-transform: uppercase;
+}
 
-        p{
-            font-size: 1.3rem;
-            word-wrap: normal;
-            width: 70%;
-        }
-    }
+/* ---------- 8. Información previa al evento ---------- */
+#info p {
+  font-size: clamp(1.2rem, 1rem + 1vw, 1.5rem);
+  font-weight: 500;
+  line-height: 1.3;
+}
 
-    #lugar{
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        font-family: var(--font-montserrat);
+#info p:last-child {
+  margin-top: 0.5rem;
+  font-family: var(--font-titulo);
+  font-size: clamp(1.4rem, 1.1rem + 1.5vw, 2rem);
+  font-weight: 400;
+  letter-spacing: 0.02em;
+  line-height: 1.15;
+  text-transform: uppercase;
+}
 
-        button{
-            font-family: var(--font-montserrat);
-            font-size: 1.8rem;
-            font-weight: bolder;
-            margin: 20px;
-            padding: 10px 20px;
-            border-radius: 10px;
-            border: 2px 2px var(--color-blanco);
-            background-color: var(--color-blanco);
-            color: var(--color-azul);
-            cursor: pointer;
-            box-shadow: 2px 2px 6px var(--color-azul);
-            /* text-shadow: -1px -1px 1px white; */
+/* ---------- 9. Ajustes por tamaño/orientación ---------- */
 
+/* Celulares en horizontal o ventanas bajas: compactar verticalmente */
+@media (max-height: 560px) {
+  .container {
+    gap: 0.75rem;
+  }
 
-        }
-    }
+  .img-titulo {
+    max-height: 18dvh;
+  }
 
+  #lugar,
+  #veri,
+  #si,
+  #no,
+  #info {
+    padding: 0.75rem 1rem;
+  }
 
+  #lugar button {
+    min-height: 48px;
+    margin-top: 0.4rem;
+  }
+}
+
+/* Pantallas muy angostas */
+@media (max-width: 360px) {
+  #lugar button {
+    min-width: 0;
+    width: 100%;
+  }
+}
+
+/* Respeta la preferencia de menos movimiento */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation: none !important;
+    transition: none !important;
+  }
 }

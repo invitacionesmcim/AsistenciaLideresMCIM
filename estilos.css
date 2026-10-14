@@ -1,1012 +1,403 @@
-:root {
-  --color-azul:#0478f8;
-  --color-blanco:#ffffff;
-  --font-montserrat:  "Montserrat", sans-serif;
-  --font-CarlaSans: "CarlaSans", sans-serif;
+/* ==========================================================================
+   Líderes MCIM – Confirmación de asistencia
+   Enfoque: una sola hoja fluida (mobile-first), sin bloques duplicados por
+   dispositivo. Todo escala con clamp(), min(), dvh y flexbox.
+   ========================================================================== */
 
+/* ---------- 1. Variables ---------- */
+:root {
+  --color-acento: #10a047; /* verde del sticker (un poco más oscuro que #15b04b para que el texto blanco tenga contraste) */
+  --color-tinta: #262626;  /* negro de los titulares */
+  --color-papel: #f3f2ef;  /* papel arrugado */
+  --color-blanco: #ffffff;
+  --color-texto: #262626;
+  --color-texto-intro: #262626;
+  --color-borde: #262626;
+
+  --font-titulo: "Anton", Impact, "Arial Narrow", sans-serif;            /* titulares tipo "REUNIÓN" */
+  --font-texto: "Barlow Condensed", "Arial Narrow", sans-serif;         /* textos, etiquetas y botones */
+
+  --espacio-pagina: clamp(1rem, 4vw, 3rem);
+  --ancho-contenido: 36rem;
+  --ancho-form: 28rem;
+  --radio: 0; /* el afiche es todo de esquinas rectas */
+}
+
+/* ---------- 2. Base ---------- */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
 }
 
 html {
-  box-sizing: border-box;
-}
-
-*, *::before, *::after {
-  box-sizing: inherit;
-}
-
-* {
-  box-sizing: border-box;
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
 }
 
 body {
-  background-color: #fff;
   margin: 0;
-  padding: 0;
+  min-height: 100vh;   /* respaldo */
+  min-height: 100dvh;  /* respeta la barra del navegador en móviles */
+  background-color: var(--color-papel);
   background-image: url("./images/wall.webp");
   background-repeat: repeat;
-  background-size:auto;
-  width: 100vw;
-  height: 100vh;
+  background-size: auto;
+  font-family: var(--font-texto);
+  color: var(--color-texto);
   overflow-x: hidden;
-  overflow-y: scroll;
 }
 
-ul {
-  text-align: left;
-  display: inline-block;
-  margin-top: 0;
-  margin-bottom: 1rem;
-  padding-left: 1.4rem;
-
-  list-style-type: "✔ ";
+img {
+  display: block;
+  max-width: 100%;
+  height: auto;
 }
 
-b {
-  font-weight: bold;
+p {
+  margin-block: 0.5rem;
 }
-
-.cursiva{
-  font-weight: semibold;
-  font-size: larger;
-}
-
 
 button {
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: #fff;
-  color: var(--color-azul);
+  min-height: 44px; /* tamaño mínimo táctil */
+  padding: 10px 24px;
   border: none;
-  padding: 10px 20px;
+  border-radius: var(--radio);
+  background-color: var(--color-acento);
+  color: #fff;
+  font-family: var(--font-texto);
+  font-size: 1.25rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
   cursor: pointer;
-  font-size: 16px;
-  border-radius: 20px;
-  font-weight: bold;
-  font-family: var(--font-montserrat);
-  box-shadow: 1px 2px 3px rgba(191, 143, 55, 0.4);
-  
+  box-shadow: 3px 3px 0 var(--color-tinta);
 }
 
-.fade {
-  overflow-y: auto;
-
-  -webkit-mask-image: linear-gradient(
-    to bottom,
-    transparent 0%,
-    black 10%,
-    black 90%,
-    transparent 100%
-  );
-
-  mask-image: linear-gradient(
-    to bottom,
-    transparent 0%,
-    black 10%,
-    black 90%,
-    transparent 100%
-  );
+button:active:not(:disabled) {
+  transform: translate(2px, 2px);
+  box-shadow: 1px 1px 0 var(--color-tinta);
 }
 
+button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
 
+:focus-visible {
+  outline: 3px solid var(--color-acento);
+  outline-offset: 2px;
+}
 
+/* ---------- 3. Página principal ---------- */
 
+/* Centra el contenido vertical y horizontalmente; si no cabe, la página
+   simplemente hace scroll (ya no hay position: fixed ni alturas en %). */
+.container {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr); /* el ancho de los campos nunca ensancha la columna */
+  place-items: center;
+  min-height: 100vh;
+  min-height: 100dvh;
+  padding:
+    max(var(--espacio-pagina), env(safe-area-inset-top))
+    max(var(--espacio-pagina), env(safe-area-inset-right))
+    max(var(--espacio-pagina), env(safe-area-inset-bottom))
+    max(var(--espacio-pagina), env(safe-area-inset-left));
+}
 
-/* Pantalla PC*/
+.invitacion-mensaje {
+  width: 100%;
+  min-width: 0;
+  max-width: var(--ancho-contenido);
+  overflow-wrap: anywhere;
+  text-align: center;
+  color: var(--color-texto-intro);
+  font-size: clamp(1.125rem, 1rem + 0.7vw, 1.5rem);
+  font-weight: 500;
+  line-height: 1.35;
+}
+
+#sec1 {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+#logo {
+  width: auto;
+  height: clamp(3rem, 10dvh, 5.5rem);
+  max-width: 60%;
+  margin: 0 auto 0.75rem;
+  object-fit: contain;
+}
+
+#noche {
+  width: min(100%, 32rem);
+  height: auto;
+  max-height: 38dvh; /* evita que el título ocupe todo en horizontal */
+  margin: 0 auto 1rem;
+  object-fit: contain;
+}
+
+/* ---------- 4. Formulario ---------- */
+.invitacion-form {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 0.35rem;
+  width: 100%;
+  max-width: var(--ancho-form);
+  margin-top: 0.5rem;
+  color: var(--color-texto);
+}
+
+.invitacion-form label {
+  font-size: 1.2rem;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  text-align: left;
+}
+
+.invitacion-form input,
+.invitacion-form select {
+  display: block;
+  width: 100%;
+  min-width: 0;      /* anula el ancho intrínseco (size=20 del input, opción más larga del select) */
+  max-width: 100%;
+  text-overflow: ellipsis;
+  min-height: 44px;
+  margin-bottom: 0.6rem;
+  padding: 8px 10px;
+  border: 2px solid var(--color-tinta);
+  border-radius: var(--radio);
+  background: #fff;
+  color: var(--color-texto);
+  font-family: var(--font-texto);
+  font-size: 1.1875rem; /* 19px: la fuente condensada se ve más pequeña; >16px evita el zoom en iOS */
+  font-weight: 500;
+}
+
+.invitacion-form input:focus,
+.invitacion-form select:focus {
+  border-color: var(--color-acento);
+}
+
+.invitacion-form button {
+  align-self: center;
+  margin-top: 0.5rem;
+}
+
+/* ---------- 5. Modal ---------- */
+
+/* El JS alterna display (none/flex) en #modal y en cada tarjeta.
+   Por eso aquí solo se define el valor por defecto de cada una. */
+#modal {
+  position: fixed;
+  inset: 0;
+  z-index: 10;
+  display: none;
+  padding: var(--espacio-pagina);
+  background-color: rgba(20, 20, 20, 0.6);
+  overflow-y: auto; /* si la tarjeta no cabe, el modal hace scroll */
+  overscroll-behavior: contain;
+  font-weight: normal;
+}
+
+/* margin: auto centra la tarjeta sin cortar el inicio cuando hay scroll */
+#modal-content,
+#modal-noregistrado,
+#modal-verificando {
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  width: min(100%, 28rem);
+  margin: auto;
+  padding: clamp(1rem, 4vw, 1.5rem);
+  border: 2px solid var(--color-tinta);
+  border-radius: var(--radio);
+  background-color: var(--color-papel);
+  color: var(--color-tinta);
+  text-align: center;
+}
+
+#modal-content {
+  display: none;
+  width: min(100%, var(--ancho-contenido));
+}
+
+#modal-noregistrado {
+  display: none;
+}
+
+#modal-verificando {
+  display: flex;
+}
+
+#modal .titulo {
+  width: auto;
+  height: clamp(3rem, 12dvh, 6rem);
+  max-width: 100%;
+  object-fit: contain;
+}
+
+#modal h2 {
+  margin: 0.25rem 0;
+  font-size: clamp(1.15rem, 1rem + 0.6vw, 1.35rem);
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  line-height: 1.2;
+}
+
+#modal #modal-gracias {
+  color: var(--color-texto);
+  font-family: var(--font-titulo);
+  font-size: clamp(1.4rem, 1.1rem + 1.6vw, 2rem);
+  font-weight: 400; /* Anton solo tiene un peso: evita negrita falsa */
+  letter-spacing: 0.02em;
+  line-height: 1.1;
+}
+
+#modal-noregistrado > div {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+/* QR */
+#preview {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+#qrcode {
+  padding: 8px;
+  border: 1px solid #ddd;
+  background: #fff;
+}
+
+/* Fecha y hora */
+#info-ticket {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+#info-ticket-detalles {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  width: 100%;
+  padding: 0.6rem 1rem;
+  background: var(--color-acento);
+  color: #fff;
+}
+
+#fecha {
+  padding-right: 0.75rem;
+  border-right: 2px solid #fff;
+}
+
+#fecha h3 {
+  margin: 0;
+  padding: 0;
+  font-family: var(--font-titulo);
+  font-size: clamp(1.5rem, 1.1rem + 2vw, 2.25rem);
+  font-weight: 400;
+  letter-spacing: 0.02em;
+  line-height: 1;
+}
+
+#fecha p {
+  margin: 0;
+  padding: 0;
+  font-size: 1rem;
+}
+
+#hora p {
+  margin: 0;
+  padding: 0;
+  font-family: var(--font-titulo);
+  font-size: clamp(1.25rem, 1rem + 1.2vw, 1.75rem);
+  font-weight: 400;
+  line-height: 1.1;
+}
+
+/* Botones del modal */
+#modal button {
+  align-self: center;
+  min-height: 44px;
+  margin-top: 0.75rem;
+}
+
+/* ---------- 6. Ajustes por tamaño/orientación ---------- */
+
+/* Celulares en horizontal u ventanas bajas: compactar verticalmente */
+@media (max-height: 560px) {
+  #logo {
+    height: 2.5rem;
+    margin-bottom: 0.25rem;
+  }
+
+  #noche {
+    max-height: 30dvh;
+    margin-bottom: 0.5rem;
+  }
+
+  #modal {
+    padding: 0.75rem;
+  }
+
+  #modal .titulo {
+    height: 2.5rem;
+  }
+
+  #modal-content,
+  #modal-noregistrado,
+  #modal-verificando {
+    gap: 0.25rem;
+    padding: 0.75rem;
+  }
+
+  #modal h2 {
+    margin: 0.1rem 0;
+  }
+}
+
+/* Pantallas muy angostas */
+@media (max-width: 360px) {
+  .invitacion-form label {
+    font-size: 1rem;
+  }
+
+  #info-ticket-detalles {
+    gap: 0.5rem;
+  }
+}
+
+/* Pantallas grandes: un poco más de aire */
 @media (min-width: 1001px) {
-  p {
-    margin-bottom: 0.5rem;
-    margin-top: 0.5rem;
-  }
-
-  .container {
-    width: 100vw;
-    height: 100vh;
-    padding: 0%;
-    margin: 0%;
-
-    position: absolute;
-    top: 0px;
-    left: 0px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    align-content: center;
-    justify-items: center;
-    
-    /* overflow-y: hidden; */
-    
-
-  }
-
   .invitacion-mensaje {
-    width: 100vw;
-    height: 90%;
-
-
-
-    display:block;
-
-    position:fixed;
-    overflow-y: scroll;
-    top: 5%;
-
-    text-align: center;
-    color: white;
-    font-family: var(--font-montserrat);
-
-    font-size: 22px;
-
-    justify-content: center;
-    align-items: center;
-    margin-inline: auto;
-    justify-items: center;
-
-    padding-bottom:2rem;
-    padding-inline: 8rem;
-
-    #inicio, #sec1{
-      display: block;
-      align-content: center;
-      justify-content: center;
-      height: 100vh ;
-    }
-
-    #logo {
-      height: 10%;
-      display: flex;
-      align-self: center;
-      margin-inline: auto;
-      margin-bottom: 0.2rem;
-    }
-
-    #noche {
-      height: 45%;
-      display: flex;
-      align-self: center;
-      margin-inline: auto;
-      margin-bottom: 0.5rem;
-    }
-
-    #titulo-dress{
-      display:flex;
-      flex-direction: column;
-      align-self: center;
-      width: 25%;
-      justify-self: center;
-    }
-    #titulo-meet{
-      display:flex;
-      justify-self: center;
-      flex-direction: column;
-      align-self: center;
-      width: 20%;
-    }
-
-
-
-    .invitacion-form {
-      display: flex;
-      flex-direction: column;
-      color: black;
-      font-family: var(--font-montserrat);
-
-      padding-inline: 4.5rem;
-      margin-bottom: 1rem;
-
-      align-items: center;
-      justify-content: center;
-
-      label {
-        margin-bottom: 5px;
-        font-size: 17px;
-        font-weight: bold;
-        text-align: left;
-      }
-
-      input {
-        padding: 5px;
-        margin-bottom: 10px;
-        border: 1px solid var(--color-azul);
-        border-radius: 4px;
-        font-size: 16px;
-        font-family: var(--font-montserrat);
-        width: 500px;
-        
-      }
-
-      button {
-        margin-bottom: 3.5rem;
-      }
-    }
-  }
-  #modal {
-    width: 100vw;
-    height: 100vh;
-    background-color: rgba(0, 0, 0, 0.5);
-    position: fixed;
-    top: 0px;
-    display: none;
-    align-items: center;
-    justify-content: center;
-    font-family: var( --font-montserrat);
-    font-weight: normal;
-    overflow: hidden;
-
-    #modal-content {
-      display: none;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      background-color: #fefefe;
-      padding: 20px;
-      border: 1px solid #888;
-      width: 80%;
-      height: 90%;
-      border-radius: 8px;
-      text-align: center;
-      color: var(--color-azul);
-    }
-
-    #modal-noregistrado {
-      display: none;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-
-      background-color: #fefefe;
-      padding: 20px;
-      border: 1px solid #888;
-      width: 60%;
-      height: 40%;
-      border-radius: 8px;
-      text-align: center;
-      color: var(--color-azul);
-    }
-
-    #modal-verificando {
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-
-      background-color: #fefefe;
-      padding: 20px;
-      border: 1px solid #888;
-      width: 60%;
-      height: 40%;
-      border-radius: 8px;
-      text-align: center;
-      color: var(--color-azul);
-    }
-
-    .titulo {
-      display: flex;
-      align-self: center;
-
-      height: 20%;
-      width: auto;
-    }
-
-    h2 {
-      margin-top: 10px;
-      margin-bottom: 5px;
-      font-size: 18px;
-    }
-
-    #modal-gracias {
-      color: black;
-      font-weight: bold;
-      font-size: 22px;
-    }
-
-    #preview {
-      margin-top: 0px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-    }
-    #qrcode {
-      padding: 8px;
-      background: #fff;
-      border: 1px solid #ddd;
-    }
-
-    #info-ticket {
-      display: flex;
-      flex-direction: column;
-      width: 100%;
-
-      #info-ticket-detalles {
-        display: flex;
-        flex-direction: row;
-        width: 100%;
-        gap: 5px;
-        justify-content: center;
-        align-items: center;
-
-        #fecha {
-          border-right: var(--color-azul) 1px solid;
-          padding-right: 5px;
-          width: 40%;
-          h3 {
-            padding: 0%;
-            margin: 0%;
-            font-size: 2rem;
-          }
-
-          p {
-            padding: 0%;
-            margin: 0%;
-            font-size: 0.8rem;
-          }
-        }
-
-        #hora {
-          border-right: var(--color-azul) 1px solid;
-          padding-right: 5px;
-
-          p {
-            padding: 0%;
-            margin: 0%;
-            font-size: 1.5rem;
-          }
-        }
-
-        #dresscode {
-          width: 40%;
-          h3 {
-            padding: 0%;
-            margin: 0%;
-            font-size: 2rem;
-          }
-
-          p {
-            padding: 0%;
-            margin: 0%;
-            font-size: 0.8rem;
-          }
-        }
-      }
-    }
-
-    button {
-      margin-top: 12px;
-      padding: 8px 12px;
-      cursor: pointer;
-      border-radius: 4px;
-      box-shadow: 1px 2px 3px var(--color-azul);
-      border: none;
-      background: var(--color-azul);
-      color: #fff;
-      font-size: 16px;
-      font-family:var(--font-montserrat);
-      align-self: center;
-      justify-self: center;
-    }
+    max-width: 44rem;
   }
 }
 
-/* Tablet */
-@media (min-width: 701px) and (max-width: 1000px) {
-  p {
-    margin-bottom: 0.5rem;
-    margin-top: 0.5rem;
-  }
-
-  
- .frame {
-      position: fixed;
-      width: 100vw;
-      height: 100vh;
-      top: 0;
-      left: 0;
-      z-index: -1;
-      margin: 0px;
-      padding: 0px;
-    }
-
-  .container {
-    width: 100vw;
-    height: 100vh;
-    padding: 0%;
-    margin: 0%;
-
-    position: absolute;
-    top: 0px;
-    left: 0px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    align-content: center;
-    justify-items: center;
-    
-    /* overflow-y: hidden; */
-    
-
-  }
-
-  .invitacion-mensaje {
-    width: 100vw;
-    height: 90%;
-
-
-
-    display:block;
-
-    position:fixed;
-    overflow-y: scroll;
-    top: 5%;
-
-
-    text-align: center;
-    color: black;
-    font-family: var(--font-montserrat);
-
-    font-size: 18px;
-
-    justify-content: center;
-    align-items: center;
-    margin-inline: auto;
-    justify-items: center;
-
-    padding-bottom:2rem;
-    padding-inline: 5rem;
-
-    #inicio, #sec1{
-      display: block;
-      align-content: center;
-      justify-content: center;
-      height: 100vh ;
-    }
-
-     #sec2{
-      display: block;
-      flex-direction: column;
-      align-content: center;
-      justify-content: center;
-      min-height: 100vh;
-    }
-
-    #logo {
-      height: 15%;
-      display: flex;
-      align-self: center;
-      margin-inline: auto;
-      margin-bottom: 1rem;
-    }
-
-    #noche {
-      width: 80%;
-      display: flex;
-      align-self: center;
-      margin-inline: auto;
-      margin-bottom: 2rem;
-    }
-
-    #titulo-dress{
-      display:flex;
-      flex-direction: column;
-      align-self: center;
-      width: 70%;
-      justify-self: center;
-    }
-    #titulo-meet{
-      display:flex;
-      justify-self: center;
-      flex-direction: column;
-      align-self: center;
-      width: 50%;
-    }
-
-
-
-    .invitacion-form {
-      display: flex;
-      flex-direction: column;
-      color: black;
-      font-family: var(--font-montserrat);
-
-      padding-inline: 2.5rem;
-        margin-bottom: 1rem;
-
-      label {
-        margin-bottom: 5px;
-        font-size: 17px;
-        font-weight: bold;
-        text-align: left;
-      }
-
-      input {
-        padding: 5px;
-        margin-bottom: 10px;
-        border: 1px solid var(--color-azul);
-        border-radius: 4px;
-        font-size: 16px;
-        font-family: var(--font-montserrat);
-      }
-
-      button {
-        margin-bottom: 3.5rem;
-      }
-    }
-  }
-
-  #modal {
-    width: 100vw;
-    height: 100vh;
-    background-color: rgba(0, 0, 0, 0.5);
-    position: fixed;
-    top: 0px;
-    display: none;
-    align-items: center;
-    justify-content: center;
-    font-family: var(--font-montserrat);
-    font-weight: normal;
-    overflow: hidden;
-
-    #modal-content {
-      display: none;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      background-color: #fefefe;
-      padding: 20px;
-      border: 1px solid #888;
-      width: 80%;
-      height: 90%;
-      border-radius: 8px;
-      text-align: center;
-      color: var(--color-azul);
-    }
-
-    #modal-noregistrado {
-      display: none;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-
-      background-color: #fefefe;
-      padding: 20px;
-      border: 1px solid #888;
-      width: 60%;
-      height: 40%;
-      border-radius: 8px;
-      text-align: center;
-      color: var(--color-azul);
-    }
-
-    #modal-verificando {
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-
-      background-color: #fefefe;
-      padding: 20px;
-      border: 1px solid #888;
-      width: 60%;
-      height: 40%;
-      border-radius: 8px;
-      text-align: center;
-      color: var(--color-azul);
-    }
-
-    .titulo {
-      display: flex;
-      align-self: center;
-
-      height: 20%;
-      width: auto;
-    }
-
-    h2 {
-      margin-top: 10px;
-      margin-bottom: 5px;
-      font-size: 18px;
-    }
-
-    #modal-gracias {
-      color: black;
-      font-weight: bold;
-      font-size: 22px;
-    }
-
-    #preview {
-      margin-top: 0px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-    }
-    #qrcode {
-      padding: 8px;
-      background: #fff;
-      border: 1px solid #ddd;
-    }
-
-    #info-ticket {
-      display: flex;
-      flex-direction: column;
-      width: 100%;
-
-      #info-ticket-detalles {
-        display: flex;
-        flex-direction: row;
-        width: 100%;
-        gap: 5px;
-        justify-content: center;
-        align-items: center;
-
-        #fecha {
-          border-right: var(--color-azul) 1px solid;
-          padding-right: 5px;
-          width: 40%;
-          h3 {
-            padding: 0%;
-            margin: 0%;
-            font-size: 2rem;
-          }
-
-          p {
-            padding: 0%;
-            margin: 0%;
-            font-size: 0.8rem;
-          }
-        }
-
-        #hora {
-          border-right: var(--color-azul) 1px solid;
-          padding-right: 5px;
-
-          p {
-            padding: 0%;
-            margin: 0%;
-            font-size: 1.5rem;
-          }
-        }
-
-        #dresscode {
-          width: 40%;
-          h3 {
-            padding: 0%;
-            margin: 0%;
-            font-size: 2rem;
-          }
-
-          p {
-            padding: 0%;
-            margin: 0%;
-            font-size: 0.8rem;
-          }
-        }
-      }
-    }
-
-    button {
-      margin-top: 12px;
-      padding: 8px 12px;
-      cursor: pointer;
-      border-radius: 4px;
-      box-shadow: 1px 2px 3px var(--color-azul);
-      border: none;
-      background: var(--color-azul);
-      color: #fff;
-      font-size: 16px;
-      font-family:var(--font-montserrat);
-      align-self: center;
-      justify-self: center;
-    }
-  }
-}
-
-/* Pantalla CELULAR*/
-@media (max-width: 700px) {
-  p {
-    margin-bottom: 0.5rem;
-    margin-top: 0.5rem;
-  }
-
-  .frame {
-      position: fixed;
-      width: 100vw;
-      height: 100vh;
-      top: 0;
-      left: 0;
-      z-index: -1;
-      margin: 0px;
-      padding: 0px;
-    }
-
-  .container {
-    width: 100vw;
-    height: 100vh;
-    padding: 0rem;
-    margin: 0rem;
-
-    position: absolute;
-    top: 0px;
-    left: 0px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    align-content: center;
-    justify-items: center;
-
-
-  }
-
-  .invitacion-mensaje {
-    width: 100vw;
-    height: 88%;
-
-
-
-    display:block;
-
-    position:fixed;
-    overflow-y: scroll;
-    top: 6%;
-
-
-    text-align: center;
-    color: black;
-    font-family: var(--font-montserrat);
-
-    font-size: 18px;
-
-    justify-content: center;
-    align-items: center;
-    margin-inline: auto;
-    justify-items: center;
-
-
-    padding-inline: 5rem;
-
-    #inicio, #sec1{
-      display: block;
-      align-content: center;
-      justify-content: center;
-      height: 100vh ;
-    }
-
-     #sec2{
-      display: block;
-      flex-direction: column;
-      align-content: center;
-      justify-content: center;
-      min-height: 100vh;
-    }
-
-    #logo {
-      height: 15%;
-      display: flex;
-      align-self: center;
-      margin-inline: auto;
-      margin-bottom: 1rem;
-    }
-
-    #noche {
-      width: 100%;
-      display: flex;
-      align-self: center;
-      margin-inline: auto;
-      margin-bottom: 2rem;
-    }
-
-    #titulo-dress{
-      display:flex;
-      flex-direction: column;
-      align-self: center;
-      width: 70%;
-      justify-self: center;
-    }
-    #titulo-meet{
-      display:flex;
-      justify-self: center;
-      flex-direction: column;
-      align-self: center;
-      width: 50%;
-    }
-
-
-
-    .invitacion-form {
-      display: flex;
-      flex-direction: column;
-        color: black;
-        font-family: var(--font-montserrat);
-
-      padding-inline: 1rem;
-        margin-bottom: 1rem;
-
-      label {
-        margin-bottom: 5px;
-        font-size: 17px;
-        font-weight: bold;
-        text-align: left;
-      }
-
-      input {
-        padding: 5px;
-        margin-bottom: 10px;
-        border: 1px solid var(--color-azul);
-        border-radius: 4px;
-        font-size: 16px;
-        font-family: var(--font-montserrat);
-      }
-
-      button {
-        margin-bottom: 3rem;
-      }
-    }
-  }
-
-  #modal {
-    width: 100vw;
-    height: 100vh;
-    background-color: rgba(0, 0, 0, 0.5);
-    position: fixed;
-    top: 0px;
-    display: none;
-    align-items: center;
-    justify-content: center;
-    font-family: var(--font-montserrat);
-    font-weight: normal;
-    overflow: hidden;
-
-    #modal-content {
-      display: none;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      background-color: #fefefe;
-      padding: 20px;
-      border: 1px solid #888;
-      width: 80%;
-      height: 90%;
-      border-radius: 8px;
-      text-align: center;
-      color: var(--color-azul);
-    }
-
-    #modal-noregistrado {
-      display: none;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-
-      background-color: #fefefe;
-      padding: 20px;
-      border: 1px solid #888;
-      width: 60%;
-      height: 40%;
-      border-radius: 8px;
-      text-align: center;
-      color: var(--color-azul);
-    }
-
-    #modal-verificando {
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-
-      background-color: #fefefe;
-      padding: 20px;
-      border: 1px solid #888;
-      width: 60%;
-      height: 40%;
-      border-radius: 8px;
-      text-align: center;
-      color: var(--color-azul);
-    }
-
-    .titulo {
-      display: flex;
-      align-self: center;
-
-      height: 20%;
-      width: auto;
-    }
-
-    h2 {
-      margin-top: 10px;
-      margin-bottom: 5px;
-      font-size: 18px;
-    }
-
-    #modal-gracias {
-      color: black;
-      font-weight: bold;
-      font-size: 22px;
-    }
-
-    #preview {
-      margin-top: 0px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-    }
-    #qrcode {
-      padding: 8px;
-      background: #fff;
-      border: 1px solid #ddd;
-    }
-
-    #info-ticket {
-      display: flex;
-      flex-direction: column;
-      width: 100%;
-
-      #info-ticket-detalles {
-        display: flex;
-        flex-direction: row;
-        width: 100%;
-        gap: 5px;
-        justify-content: center;
-        align-items: center;
-
-        #fecha {
-          border-right: var(--color-azul) 1px solid;
-          padding-right: 5px;
-          width: 40%;
-          h3 {
-            padding: 0%;
-            margin: 0%;
-            font-size: 1rem;
-          }
-
-          p {
-            padding: 0%;
-            margin: 0%;
-            font-size: 0.8rem;
-          }
-        }
-
-        #hora {
-          border-right: var(--color-azul) 1px solid;
-          padding-right: 5px;
-
-          p {
-            padding: 0%;
-            margin: 0%;
-            font-size: 1.5rem;
-          }
-        }
-
-        #dresscode {
-          width: 40%;
-          h3 {
-            padding: 0%;
-            margin: 0%;
-            font-size: 2rem;
-          }
-
-          p {
-            padding: 0%;
-            margin: 0%;
-            font-size: 0.8rem;
-          }
-        }
-      }
-    }
-
-    button {
-      margin-top: 12px;
-      padding: 8px 12px;
-      cursor: pointer;
-      border-radius: 4px;
-      box-shadow: 1px 2px 3px var(--color-azul);
-      border: none;
-      background: var(--color-azul);
-      color: #fff;
-      font-size: 16px;
-      font-family: var(--font-montserrat);
-      align-self: center;
-      justify-self: center;
-    }
+/* Respeta la preferencia de menos movimiento */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation: none !important;
+    transition: none !important;
+    scroll-behavior: auto !important;
   }
 }
